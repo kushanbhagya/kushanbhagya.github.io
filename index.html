@@ -741,7 +741,7 @@
 
       <!-- Latest video -->
       <div class="yt-latest-video reveal" style="transition-delay:0.15s">
-        <div class="yt-video-label">Latest Video</div>
+
         <div id="ytVideoWrap">
           <div class="yt-loading">
             <div class="yt-loading-bar"></div>
@@ -1033,17 +1033,21 @@
       } catch(err) {
         // Fallback: show a direct link card
         wrap.innerHTML = `
-          <div class="yt-thumbnail-wrap" onclick="window.open('https://www.youtube.com/@CyberLabDiaries','_blank')"
-               style="display:flex;align-items:center;justify-content:center;min-height:160px;background:rgba(255,0,0,0.05);border-color:rgba(255,0,0,0.3);">
-            <div style="text-align:center;">
-              <div style="font-size:2.5rem;margin-bottom:.75rem;">▶</div>
-              <div style="font-family:var(--mono);font-size:.75rem;color:#ff4444;letter-spacing:2px;">VISIT CHANNEL</div>
-              <div style="font-family:var(--mono);font-size:.65rem;color:#4a6080;margin-top:.3rem;letter-spacing:1px;">@CyberLabDiaries</div>
-            </div>
-          </div>
-          <div class="yt-video-info">
-            <div class="yt-video-title" style="color:#ff8888;font-size:.78rem;">Preview unavailable — click to visit channel directly</div>
-          </div>
+<div class="yt-thumbnail-wrap"
+     style="position:relative;display:flex;align-items:center;justify-content:center;min-height:160px;background:rgba(255,0,0,0.05);border-color:rgba(255,0,0,0.3);overflow:hidden;">
+
+  <iframe 
+    width="100%" 
+    height="100%" 
+    src="https://www.youtube.com/embed/rY-SLmBcito?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&loop=1&playlist=rY-SLmBcito"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen>
+  </iframe>
+
+</div>
+
         `;
       }
 
