@@ -91,8 +91,8 @@ Or visit the live site directly: 👉 [kushanbhagya.github.io](https://kushanbha
 ## 🤝 Connect With Me
 
 - 🐙 **GitHub:** [github.com/kushanbhagya](https://github.com/kushanbhagya)
-- 💼 **LinkedIn:** ([https://www.linkedin.com/in/kushan-bhagya/](https://www.linkedin.com/in/kushan-bhagya/))
-- 📧 **Email:** (bhagyadilshan99@gmail.com)
+- 💼 **LinkedIn:** [linkedin.com/in/kushan-bhagya](https://www.linkedin.com/in/kushan-bhagya/)
+- 📧 **Email:** bhagyadilshan99@gmail.com
 
 ---
 
