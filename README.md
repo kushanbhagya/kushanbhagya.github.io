@@ -37,7 +37,7 @@ I'm an IT graduate specializing in **Cyber Security**, with hands-on experience 
 
 ### 🧪 Cybersecurity Home Lab
 A simulated attack-and-defense environment built for hands-on penetration testing practice.
-- **Tools:** Kali Linux, Metasploit, Nmap, Apache
+- **Tools:** Kali Linux, Ubuntu, Metasploit, Nmap, Apache, Hydra, Wireshark, Fail2Ban
 - **Focus:** Real-world pentesting workflows and defensive techniques
 
 ### 🔍 Malicious URL Detector *(ML Project)*
