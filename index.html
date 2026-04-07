@@ -731,11 +731,11 @@
           </div>
         </div>
         <div class="yt-stats" id="ytStats">
-          <!-- <div class="yt-stat"><div class="yt-stat-val" id="ytSubs">—</div><div class="yt-stat-lbl">Subscribers</div></div>
+          <div class="yt-stat"><div class="yt-stat-val" id="ytSubs">—</div><div class="yt-stat-lbl">Subscribers</div></div>
           <div class="yt-stat"><div class="yt-stat-val" id="ytViews">—</div><div class="yt-stat-lbl">Total Views</div></div>
-          <div class="yt-stat"><div class="yt-stat-val" id="ytVideos">—</div><div class="yt-stat-lbl">Videos</div></div> -->
-        </div><br>
-        <p class="yt-desc">Documenting my cybersecurity home lab journey — attack simulations, SIEM setups, network configs, CTF writeups, and study vlogs. Real lab. Real learning. No fluff.</p><br>
+          <div class="yt-stat"><div class="yt-stat-val" id="ytVideos">—</div><div class="yt-stat-lbl">Videos</div></div>
+        </div>
+        <p class="yt-desc">Documenting my cybersecurity home lab journey — attack simulations, SIEM setups, network configs, CTF writeups, and study vlogs. Real lab. Real learning. No fluff.</p>
         <a href="https://www.youtube.com/@CyberLabDiaries" target="_blank" class="yt-subscribe-btn">▶ &nbsp;Subscribe Now</a>
       </div>
 
@@ -745,7 +745,7 @@
         <div id="ytVideoWrap">
           <div class="yt-loading">
             <div class="yt-loading-bar"></div>
-            <span></span>
+            <span>FETCHING LATEST VIDEO...</span>
           </div>
         </div>
         <a href="https://www.youtube.com/@CyberLabDiaries/videos" target="_blank" class="yt-more-btn">▶ &nbsp;View All Videos →</a>
@@ -963,6 +963,8 @@
 
     /* ===== YOUTUBE ===== */
     const YT_CHANNEL_ID = 'UCg5H2FK0RgkUFWFiftbWXyg';
+    const YT_HANDLE = '@CyberLabDiaries';
+    const YT_API_KEY = ''; // optional: add your YouTube Data API v3 key here for exact live stats
 
     function formatCount(n) {
       if (!n || n === '0') return '0';
@@ -985,11 +987,49 @@
       return `${Math.floor(months/12)}y ago`;
     }
 
+    function setBadgeStat(id, imgUrl, altText) {
+      const el = document.getElementById(id);
+      el.innerHTML = `<img src="${imgUrl}" alt="${altText}" style="max-width:100%;height:auto;border-radius:6px;">`;
+      el.style.fontSize = '0';
+      el.style.lineHeight = '1';
+    }
+
+    async function loadChannelStats(feedItemCount) {
+      try {
+        if (YT_API_KEY) {
+          const statsUrl = `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${YT_CHANNEL_ID}&key=${YT_API_KEY}`;
+          const res = await fetch(statsUrl);
+          const data = await res.json();
+          const stats = data?.items?.[0]?.statistics;
+
+          if (stats) {
+            document.getElementById('ytSubs').textContent = formatCount(stats.subscriberCount || 0);
+            document.getElementById('ytViews').textContent = formatCount(stats.viewCount || 0);
+            document.getElementById('ytVideos').textContent = formatCount(stats.videoCount || 0);
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn('YouTube API stats unavailable, falling back to badges.', e);
+      }
+
+      setBadgeStat(
+        'ytSubs',
+        `https://img.shields.io/youtube/channel/subscribers/${YT_CHANNEL_ID}?style=for-the-badge&logo=youtube&label=SUBS&color=ff0000`,
+        'YouTube subscribers'
+      );
+      setBadgeStat(
+        'ytViews',
+        `https://img.shields.io/youtube/channel/views/${YT_CHANNEL_ID}?style=for-the-badge&logo=youtube&label=VIEWS&color=ff0000`,
+        'YouTube views'
+      );
+      document.getElementById('ytVideos').textContent = feedItemCount ? `${feedItemCount}+` : 'LIVE';
+    }
+
     async function loadYouTube() {
       const wrap = document.getElementById('ytVideoWrap');
+      let feedItemCount = 0;
 
-      // YouTube Data API v3 — using RSS feed fallback (no API key needed)
-      // Fetch latest video via RSS
       try {
         const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${YT_CHANNEL_ID}`;
         const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
@@ -997,8 +1037,8 @@
         const data = await res.json();
 
         if (data.status === 'ok' && data.items && data.items.length > 0) {
+          feedItemCount = data.items.length;
           const item = data.items[0];
-          // Extract video ID from link
           const videoIdMatch = item.link.match(/v=([^&]+)/);
           const videoId = videoIdMatch ? videoIdMatch[1] : null;
           const thumbUrl = videoId
@@ -1006,9 +1046,10 @@
             : (item.thumbnail || '');
           const pubDate = item.pubDate ? ytTimeAgo(item.pubDate) : '';
           const title = item.title || 'Latest Video';
-          const link = item.link || `https://www.youtube.com/@CyberLabDiaries`;
+          const link = item.link || `https://www.youtube.com/${YT_HANDLE}`;
 
           wrap.innerHTML = `
+            <div class="yt-video-label">Latest Upload</div>
             <div class="yt-thumbnail-wrap" onclick="window.open('${link}','_blank')">
               <img class="yt-thumb-img" src="${thumbUrl}" alt="${escStr(title)}"
                 onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg'">
@@ -1022,39 +1063,24 @@
               </div>
             </div>
           `;
-
-          // Try channel stats via a secondary RSS call
-          if (data.feed) {
-            document.getElementById('ytVideos').textContent = data.items.length + '+';
-          }
         } else {
           throw new Error('No items');
         }
       } catch(err) {
-        // Fallback: show a direct link card
         wrap.innerHTML = `
-<div class="yt-thumbnail-wrap"
-     style="position:relative;display:flex;align-items:center;justify-content:center;min-height:160px;background:rgba(255,0,0,0.05);border-color:rgba(255,0,0,0.3);overflow:hidden;">
-
-  <iframe 
-    width="100%" 
-    height="100%" 
-    src="https://www.youtube.com/embed/rY-SLmBcito?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&loop=1&playlist=rY-SLmBcito"
-    frameborder="0"
-    allow="autoplay; encrypted-media"
-    referrerpolicy="strict-origin-when-cross-origin"
-    allowfullscreen>
-  </iframe>
-
-</div>
-
+          <div class="yt-video-label">Channel Preview</div>
+          <div class="yt-thumbnail-wrap" onclick="window.open('https://www.youtube.com/${YT_HANDLE}','_blank')"
+               style="display:flex;align-items:center;justify-content:center;min-height:160px;background:rgba(255,0,0,0.05);border-color:rgba(255,0,0,0.3);">
+            <div style="text-align:center;">
+              <div style="font-size:2.5rem;margin-bottom:.75rem;">▶</div>
+              <div style="font-family:var(--mono);font-size:.75rem;color:#ff4444;letter-spacing:2px;">VISIT CHANNEL</div>
+              <div style="font-family:var(--mono);font-size:.65rem;color:#4a6080;margin-top:.3rem;letter-spacing:1px;">${YT_HANDLE}</div>
+            </div>
+          </div>
         `;
       }
 
-      // Channel stats — note: YouTube's public API requires a key for subscriber counts.
-      // We'll display what we can and show a graceful placeholder for subscriber count.
-      document.getElementById('ytSubs').textContent = '—';
-      document.getElementById('ytViews').textContent = '—';
+      await loadChannelStats(feedItemCount);
     }
 
     function escStr(s) { return String(s).replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
