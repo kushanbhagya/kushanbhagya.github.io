@@ -481,6 +481,259 @@
       section { padding: 4rem 1.25rem; }
       .hero-glitch { letter-spacing: 2px; }
     }
+
+    /* ===================== HACKERS LAB SECTION ===================== */
+    #hackers-lab { max-width: 1100px; }
+
+    .hl-wrapper {
+      position: relative;
+      border: 1px solid rgba(255,0,160,0.3);
+      overflow: hidden;
+      background: #060208;
+    }
+    .hl-wrapper::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon-pink), #ff6600, var(--neon-pink), transparent);
+      animation: hlScan 3s linear infinite;
+    }
+    @keyframes hlScan {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* Matrix canvas background */
+    #hlMatrixCanvas {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; opacity: 0.4;
+    }
+
+    .hl-inner { padding: 16px; position: relative; z-index: 1; }
+
+    /* SKULL HEADER */
+    .hl-header {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(20, 0, 30, 0.85);
+      border: 1px solid rgba(255,0,160,0.25);
+      border-radius: 0;
+      padding: 14px 18px; margin-bottom: 12px;
+      position: relative; overflow: hidden;
+      backdrop-filter: blur(4px);
+    }
+    .hl-header::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--neon-pink), transparent);
+    }
+    .hl-header::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, #ff6600, transparent);
+    }
+
+    .hl-skull-icon {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, #2a0030, #500020);
+      border: 1px solid rgba(255,0,160,0.5);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+      box-shadow: 0 0 20px rgba(255,0,160,0.4), inset 0 0 10px rgba(255,0,160,0.1);
+      animation: hlSkullPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes hlSkullPulse {
+      0%,100% { box-shadow: 0 0 20px rgba(255,0,160,0.4), inset 0 0 10px rgba(255,0,160,0.1); }
+      50% { box-shadow: 0 0 35px rgba(255,0,160,0.7), inset 0 0 15px rgba(255,0,160,0.2); }
+    }
+
+    .hl-header-info h3 {
+      font-family: var(--display); font-size: 13px; font-weight: 700;
+      color: var(--neon-pink); letter-spacing: .08em;
+      text-shadow: 0 0 15px rgba(255,0,160,0.6);
+    }
+    .hl-header-info p {
+      font-family: var(--mono); font-size: 9px; color: #6a3060;
+      letter-spacing: .1em; text-transform: uppercase; margin-top: 2px;
+    }
+    .hl-header-actions { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+    .hl-danger-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--neon-pink);
+      animation: hlDangerPulse 1.5s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes hlDangerPulse {
+      0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(255,0,160,.5); }
+      50% { opacity:.6; box-shadow: 0 0 0 6px rgba(255,0,160,0); }
+    }
+    .hl-refresh-btn {
+      background: rgba(255,0,160,0.08);
+      border: 1px solid rgba(255,0,160,0.3);
+      color: var(--neon-pink);
+      font-family: var(--mono); font-size: 10px; padding: 5px 10px;
+      border-radius: 4px; cursor: pointer; letter-spacing: .05em; transition: all .2s;
+    }
+    .hl-refresh-btn:hover { background: rgba(255,0,160,0.18); border-color: var(--neon-pink); box-shadow: 0 0 12px rgba(255,0,160,0.3); }
+    .hl-refresh-btn.loading { opacity: .5; pointer-events: none; }
+
+    /* THREAT BANNER */
+    .hl-threat-banner {
+      background: rgba(255,0,0,0.05);
+      border: 1px solid rgba(255,0,160,0.2);
+      border-left: 3px solid var(--neon-pink);
+      padding: 10px 14px; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 10px;
+      backdrop-filter: blur(4px);
+    }
+    .hl-threat-label {
+      font-family: var(--mono); font-size: 10px; color: var(--neon-pink);
+      letter-spacing: .1em; text-transform: uppercase; white-space: nowrap;
+    }
+    .hl-threat-text {
+      font-family: var(--mono); font-size: 10px; color: #f0a0d0;
+      letter-spacing: .05em; flex: 1;
+    }
+    .hl-blink { animation: blink 1s infinite; }
+
+    /* REPO DESC */
+    .hl-repo-desc {
+      background: rgba(20,0,30,0.7);
+      border: 1px solid rgba(255,0,160,0.2);
+      border-left: 3px solid var(--neon-pink);
+      border-radius: 0; padding: 12px 14px; margin-bottom: 10px;
+      font-family: var(--mono); font-size: 11px; color: #c090d0; line-height: 1.6;
+      backdrop-filter: blur(4px);
+    }
+
+    /* STATS */
+    .hl-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 10px; }
+    @media (max-width: 600px) { .hl-stats { grid-template-columns: repeat(2, 1fr); } }
+    .hl-stat {
+      background: rgba(20,0,30,0.8);
+      border: 1px solid rgba(255,0,160,0.2);
+      border-radius: 0; padding: 12px; position: relative; overflow: hidden;
+      backdrop-filter: blur(4px);
+    }
+    .hl-stat::before {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    }
+    .hl-stat:nth-child(1)::before { background: var(--neon-pink); box-shadow: 0 0 8px var(--neon-pink); }
+    .hl-stat:nth-child(2)::before { background: #ff6600; box-shadow: 0 0 8px #ff6600; }
+    .hl-stat:nth-child(3)::before { background: #ffaa00; box-shadow: 0 0 8px #ffaa00; }
+    .hl-stat:nth-child(4)::before { background: #ff4444; box-shadow: 0 0 8px #ff4444; }
+    .hl-stat .lbl { font-size: 9px; color: #6a3060; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; font-family: var(--mono); }
+    .hl-stat .val { font-family: var(--display); font-size: 1.4rem; font-weight: 900; color: var(--neon-pink); text-shadow: 0 0 15px rgba(255,0,160,0.5); }
+    .hl-stat .sub { font-size: 8px; color: #4a2050; font-family: var(--mono); letter-spacing: .05em; margin-top: 2px; }
+
+    /* TABS */
+    .hl-tabs {
+      display: flex; gap: 3px;
+      background: rgba(20,0,30,0.8);
+      border: 1px solid rgba(255,0,160,0.2);
+      padding: 4px; margin-bottom: 10px;
+      overflow-x: auto; scrollbar-width: none;
+      backdrop-filter: blur(4px);
+    }
+    .hl-tabs::-webkit-scrollbar { display: none; }
+    .hl-tab {
+      flex: 1; min-width: fit-content;
+      background: transparent; border: none; color: #6a3060;
+      font-family: var(--mono); font-size: 11px; padding: 7px 12px;
+      cursor: pointer; transition: all 0.2s; letter-spacing: .05em; white-space: nowrap;
+    }
+    .hl-tab.active {
+      background: rgba(255,0,160,0.12);
+      color: var(--neon-pink); border: 1px solid rgba(255,0,160,0.35);
+      text-shadow: 0 0 8px rgba(255,0,160,0.5);
+    }
+    .hl-tab:hover:not(.active) { color: #c080a0; }
+
+    .hl-tab-content { display: none; }
+    .hl-tab-content.active { display: block; }
+
+    /* PANEL */
+    .hl-panel {
+      background: rgba(10,0,18,0.85);
+      border: 1px solid rgba(255,0,160,0.18);
+      overflow: hidden; margin-bottom: 10px;
+      backdrop-filter: blur(4px);
+    }
+    .hl-panel-header {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; border-bottom: 1px solid rgba(255,0,160,0.15);
+      background: rgba(20,0,30,0.6);
+    }
+    .hl-panel-title {
+      font-family: var(--display); font-size: 11px; font-weight: 600;
+      color: #c080a0; letter-spacing: .06em; text-transform: uppercase;
+    }
+    .hl-badge {
+      background: rgba(255,0,160,0.08);
+      border: 1px solid rgba(255,0,160,0.2);
+      color: #8a4080; font-size: 9px; padding: 2px 6px;
+      border-radius: 20px; margin-left: auto; font-family: var(--mono);
+    }
+
+    /* FILES */
+    .hl-file-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 14px; border-bottom: 1px solid rgba(255,0,160,0.1);
+      cursor: pointer; transition: background .15s;
+    }
+    .hl-file-item:last-child { border-bottom: none; }
+    .hl-file-item:hover { background: rgba(255,0,160,0.07); }
+    .hl-file-icon { font-size: 13px; flex-shrink: 0; width: 18px; text-align: center; }
+    .hl-file-name { font-family: var(--mono); font-size: 12px; color: #e0c0f0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .hl-file-name.dir { color: var(--neon-pink); text-shadow: 0 0 6px rgba(255,0,160,0.3); }
+    .hl-file-size { font-family: var(--mono); font-size: 10px; color: #4a2060; flex-shrink: 0; }
+
+    /* COMMITS */
+    .hl-commit-item {
+      padding: 10px 14px; border-bottom: 1px solid rgba(255,0,160,0.1);
+      transition: background .15s; cursor: pointer;
+    }
+    .hl-commit-item:last-child { border-bottom: none; }
+    .hl-commit-item:hover { background: rgba(255,0,160,0.07); }
+    .hl-commit-msg { font-family: var(--mono); font-size: 12px; color: #e0c0f0; margin-bottom: 4px; line-height: 1.4; }
+    .hl-commit-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .hl-commit-sha { font-family: var(--mono); font-size: 10px; color: var(--neon-pink); background: rgba(255,0,160,0.08); padding: 2px 6px; border-radius: 4px; }
+    .hl-commit-author { font-family: var(--mono); font-size: 10px; color: #6a3070; }
+    .hl-commit-date { font-family: var(--mono); font-size: 10px; color: #6a3070; margin-left: auto; }
+
+    /* EVENTS */
+    .hl-event-item { display: flex; gap: 10px; padding: 9px 14px; border-bottom: 1px solid rgba(255,0,160,0.1); align-items: flex-start; }
+    .hl-event-item:last-child { border-bottom: none; }
+    .hl-event-icon { width: 26px; height: 26px; background: rgba(255,0,160,0.08); border: 1px solid rgba(255,0,160,0.2); display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; margin-top: 1px; }
+    .hl-event-text { font-family: var(--mono); font-size: 11px; color: #a080b0; line-height: 1.4; }
+    .hl-event-text strong { color: #e0c0f0; }
+    .hl-event-time { font-family: var(--mono); font-size: 10px; color: #4a2060; margin-top: 2px; }
+
+    /* README */
+    .hl-readme { padding: 14px; font-family: var(--mono); font-size: 11px; color: #a080b0; line-height: 1.7; white-space: pre-wrap; word-break: break-word; max-height: 350px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(255,0,160,0.3) transparent; }
+
+    /* BREADCRUMB */
+    .hl-breadcrumb { display: flex; align-items: center; gap: 4px; padding: 7px 14px; background: rgba(20,0,30,0.6); border-bottom: 1px solid rgba(255,0,160,0.1); font-family: var(--mono); font-size: 10px; color: #4a2060; flex-wrap: wrap; }
+    .hl-breadcrumb a { color: var(--neon-pink); cursor: pointer; text-decoration: none; }
+    .hl-breadcrumb a:hover { text-decoration: underline; }
+
+    /* LOADER / ERROR */
+    .hl-loader { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; gap: 10px; color: #6a3060; font-family: var(--mono); font-size: 10px; letter-spacing: .05em; }
+    .hl-loader-bar { width: 100px; height: 2px; background: rgba(255,0,160,0.15); overflow: hidden; }
+    .hl-loader-bar::after { content: ''; display: block; width: 40%; height: 100%; background: var(--neon-pink); animation: slide 1s infinite ease-in-out; }
+    .hl-error { padding: 20px; color: #ff4466; font-family: var(--mono); font-size: 11px; text-align: center; }
+    .hl-topic { background: rgba(255,0,160,0.08); border: 1px solid rgba(255,0,160,0.25); color: var(--neon-pink); font-family: var(--mono); font-size: 9px; padding: 2px 7px; border-radius: 20px; letter-spacing: .05em; display: inline-block; margin: 2px; }
+
+    /* FOOTER */
+    .hl-footer { text-align: center; font-family: var(--mono); font-size: 9px; color: #4a2060; letter-spacing: .08em; padding: 8px 0; }
+
+    /* GH LINK BTN */
+    .hl-gh-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 2px;
+      color: var(--neon-pink); text-decoration: none;
+      border: 1px solid rgba(255,0,160,0.35);
+      padding: 0.55rem 1.1rem; transition: all 0.3s; margin-top: 1rem;
+    }
+    .hl-gh-btn:hover { border-color: var(--neon-pink); background: rgba(255,0,160,0.1); box-shadow: 0 0 18px rgba(255,0,160,0.3); }
   </style>
 </head>
 <body>
@@ -498,6 +751,7 @@
       <li><a href="#certs">Education</a></li>
       <li><a href="#youtube">YouTube</a></li>
       <li><a href="#lab-monitor">Lab Monitor</a></li>
+      <li><a href="#hackers-lab" style="color:var(--neon-pink);text-shadow:0 0 8px var(--neon-pink);">💀 Hackers Lab</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="hamburger" id="hamburger">
@@ -731,11 +985,11 @@
           </div>
         </div>
         <div class="yt-stats" id="ytStats">
-          <div class="yt-stat"><div class="yt-stat-val" id="ytSubs">—</div><div class="yt-stat-lbl">Subscribers</div></div>
+          <!-- <div class="yt-stat"><div class="yt-stat-val" id="ytSubs">—</div><div class="yt-stat-lbl">Subscribers</div></div>
           <div class="yt-stat"><div class="yt-stat-val" id="ytViews">—</div><div class="yt-stat-lbl">Total Views</div></div>
-          <div class="yt-stat"><div class="yt-stat-val" id="ytVideos">—</div><div class="yt-stat-lbl">Videos</div></div>
-        </div>
-        <p class="yt-desc">Documenting my cybersecurity home lab journey — attack simulations, SIEM setups, network configs, CTF writeups, and study vlogs. Real lab. Real learning. No fluff.</p>
+          <div class="yt-stat"><div class="yt-stat-val" id="ytVideos">—</div><div class="yt-stat-lbl">Videos</div></div> -->
+        </div><br>
+        <p class="yt-desc">Documenting my cybersecurity home lab journey — attack simulations, SIEM setups, network configs, CTF writeups, and study vlogs. Real lab. Real learning. No fluff.</p><br>
         <a href="https://www.youtube.com/@CyberLabDiaries" target="_blank" class="yt-subscribe-btn">▶ &nbsp;Subscribe Now</a>
       </div>
 
@@ -745,7 +999,7 @@
         <div id="ytVideoWrap">
           <div class="yt-loading">
             <div class="yt-loading-bar"></div>
-            <span>FETCHING LATEST VIDEO...</span>
+            <span></span>
           </div>
         </div>
         <a href="https://www.youtube.com/@CyberLabDiaries/videos" target="_blank" class="yt-more-btn">▶ &nbsp;View All Videos →</a>
@@ -850,10 +1104,120 @@
     </div>
   </section>
 
+  <!-- HACKERS LAB (GitHub Repo) -->
+  <section id="hackers-lab">
+    <div class="section-header reveal">
+      <span class="section-num" style="color:var(--neon-pink);text-shadow:0 0 10px var(--neon-pink);">07.</span>
+      <h2 class="section-title" style="color:var(--neon-pink);text-shadow:0 0 20px rgba(255,0,160,0.5);">💀 Hackers Lab</h2>
+      <div class="section-line" style="background:linear-gradient(90deg,var(--neon-pink),transparent);box-shadow:0 0 8px var(--neon-pink);"></div>
+    </div>
+
+    <!-- Threat ticker -->
+    <div class="hl-threat-banner reveal" style="margin-bottom:1.5rem;">
+      <span class="hl-threat-label">⚠ LIVE INTEL</span>
+      <span class="hl-threat-text">Monitoring repository: <strong style="color:var(--neon-pink);">kushanbhagya/Hackers-Lab</strong> — exploit scripts, CTF writeups &amp; offensive tooling</span>
+      <span class="hl-blink" style="color:var(--neon-pink);font-family:'Share Tech Mono',monospace;font-size:10px;">▮</span>
+    </div>
+
+    <div class="hl-wrapper reveal">
+      <canvas id="hlMatrixCanvas"></canvas>
+      <div class="hl-inner">
+        <!-- Header -->
+        <div class="hl-header">
+          <div class="hl-skull-icon">💀</div>
+          <div class="hl-header-info">
+            <h3>kushanbhagya / Hackers-Lab</h3>
+            <p>Offensive Security · CTF · Exploit Dev · Red Team</p>
+          </div>
+          <div class="hl-header-actions">
+            <div class="hl-danger-dot"></div>
+            <button class="hl-refresh-btn" id="hlRefreshBtn" onclick="hlLoadAll()">⟳ Refresh</button>
+          </div>
+        </div>
+
+        <!-- Repo desc -->
+        <div class="hl-repo-desc" id="hlRepoDesc">
+          <div class="hl-loader"><div class="hl-loader-bar"></div><span>Fetching target intelligence...</span></div>
+        </div>
+
+        <!-- Stats -->
+        <div class="hl-stats">
+          <div class="hl-stat"><div class="lbl">Stars</div><div class="val" id="hlStars">—</div><div class="sub">stargazers</div></div>
+          <div class="hl-stat"><div class="lbl">Forks</div><div class="val" id="hlForks">—</div><div class="sub">copies</div></div>
+          <div class="hl-stat"><div class="lbl">Watchers</div><div class="val" id="hlWatchers">—</div><div class="sub">watching</div></div>
+          <div class="hl-stat"><div class="lbl">Issues</div><div class="val" id="hlIssues">—</div><div class="sub">open</div></div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="hl-tabs">
+          <button class="hl-tab active" onclick="hlSwitchTab('files')">📁 Files</button>
+          <button class="hl-tab" onclick="hlSwitchTab('commits')">📝 Commits</button>
+          <button class="hl-tab" onclick="hlSwitchTab('activity')">⚡ Activity</button>
+          <button class="hl-tab" onclick="hlSwitchTab('readme')">💀 README</button>
+        </div>
+
+        <!-- Files -->
+        <div class="hl-tab-content active" id="hlTab-files">
+          <div class="hl-panel">
+            <div class="hl-panel-header">
+              <span>📁</span>
+              <span class="hl-panel-title">Repository Files</span>
+              <span class="hl-badge" id="hlFileBadge">—</span>
+            </div>
+            <div id="hlBreadcrumb" class="hl-breadcrumb" style="display:none">
+              <a onclick="hlNavToRoot()">root</a>
+            </div>
+            <div id="hlFileList"><div class="hl-loader"><div class="hl-loader-bar"></div><span>Loading files...</span></div></div>
+          </div>
+        </div>
+
+        <!-- Commits -->
+        <div class="hl-tab-content" id="hlTab-commits">
+          <div class="hl-panel">
+            <div class="hl-panel-header">
+              <span>📝</span>
+              <span class="hl-panel-title">Commit History</span>
+              <span class="hl-badge" id="hlCommitBadge">—</span>
+            </div>
+            <div id="hlCommitList"><div class="hl-loader"><div class="hl-loader-bar"></div><span>Loading commits...</span></div></div>
+          </div>
+        </div>
+
+        <!-- Activity -->
+        <div class="hl-tab-content" id="hlTab-activity">
+          <div class="hl-panel">
+            <div class="hl-panel-header">
+              <span>⚡</span>
+              <span class="hl-panel-title">Repository Activity</span>
+            </div>
+            <div id="hlActivityList"><div class="hl-loader"><div class="hl-loader-bar"></div><span>Loading activity...</span></div></div>
+          </div>
+        </div>
+
+        <!-- README -->
+        <div class="hl-tab-content" id="hlTab-readme">
+          <div class="hl-panel">
+            <div class="hl-panel-header">
+              <span>💀</span>
+              <span class="hl-panel-title">README</span>
+            </div>
+            <div id="hlReadmeContent"><div class="hl-loader"><div class="hl-loader-bar"></div><span>Loading README...</span></div></div>
+          </div>
+        </div>
+
+        <div class="hl-footer" id="hlFooter"></div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:1.5rem;" class="reveal">
+      <a href="https://github.com/kushanbhagya/Hackers-Lab" target="_blank" class="hl-gh-btn">💀 &nbsp;View Hackers-Lab on GitHub →</a>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section id="contact">
     <div class="section-header reveal">
-      <span class="section-num">07.</span>
+      <span class="section-num">08.</span>
       <h2 class="section-title">Contact</h2>
       <div class="section-line"></div>
     </div>
@@ -903,11 +1267,11 @@
             <span class="contact-link-val">tryhackme.com/p/Cr00k3x</span>
           </div>
         </a>
-        <a href="mailto:bhagyadilshan99@gmail.com" class="contact-link">
+        <a href="/cdn-cgi/l/email-protection#64060c05031d05000d08170c050a5d5d240309050d084a070b09" class="contact-link">
           <div class="contact-link-icon">📡</div>
           <div class="contact-link-text">
             <span class="contact-link-label">// EMAIL</span>
-            <span class="contact-link-val">bhagyadilshan99@gmail.com</span>
+            <span class="contact-link-val"><span class="__cf_email__" data-cfemail="12707a73756b73767b7e617a737c2b2b52757f737b7e3c717d7f">[email&#160;protected]</span></span>
           </div>
         </a>
       </div>
@@ -920,7 +1284,7 @@
     <p style="margin-top:.5rem;font-size:.7rem;">🔐 All hacking is authorized. All opinions are my own.</p>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     /* ===== CURSOR ===== */
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
@@ -963,8 +1327,6 @@
 
     /* ===== YOUTUBE ===== */
     const YT_CHANNEL_ID = 'UCg5H2FK0RgkUFWFiftbWXyg';
-    const YT_HANDLE = '@CyberLabDiaries';
-    const YT_API_KEY = ''; // optional: add your YouTube Data API v3 key here for exact live stats
 
     function formatCount(n) {
       if (!n || n === '0') return '0';
@@ -987,49 +1349,11 @@
       return `${Math.floor(months/12)}y ago`;
     }
 
-    function setBadgeStat(id, imgUrl, altText) {
-      const el = document.getElementById(id);
-      el.innerHTML = `<img src="${imgUrl}" alt="${altText}" style="max-width:100%;height:auto;border-radius:6px;">`;
-      el.style.fontSize = '0';
-      el.style.lineHeight = '1';
-    }
-
-    async function loadChannelStats(feedItemCount) {
-      try {
-        if (YT_API_KEY) {
-          const statsUrl = `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${YT_CHANNEL_ID}&key=${YT_API_KEY}`;
-          const res = await fetch(statsUrl);
-          const data = await res.json();
-          const stats = data?.items?.[0]?.statistics;
-
-          if (stats) {
-            document.getElementById('ytSubs').textContent = formatCount(stats.subscriberCount || 0);
-            document.getElementById('ytViews').textContent = formatCount(stats.viewCount || 0);
-            document.getElementById('ytVideos').textContent = formatCount(stats.videoCount || 0);
-            return;
-          }
-        }
-      } catch (e) {
-        console.warn('YouTube API stats unavailable, falling back to badges.', e);
-      }
-
-      setBadgeStat(
-        'ytSubs',
-        `https://img.shields.io/youtube/channel/subscribers/${YT_CHANNEL_ID}?style=for-the-badge&logo=youtube&label=SUBS&color=ff0000`,
-        'YouTube subscribers'
-      );
-      setBadgeStat(
-        'ytViews',
-        `https://img.shields.io/youtube/channel/views/${YT_CHANNEL_ID}?style=for-the-badge&logo=youtube&label=VIEWS&color=ff0000`,
-        'YouTube views'
-      );
-      document.getElementById('ytVideos').textContent = feedItemCount ? `${feedItemCount}+` : 'LIVE';
-    }
-
     async function loadYouTube() {
       const wrap = document.getElementById('ytVideoWrap');
-      let feedItemCount = 0;
 
+      // YouTube Data API v3 — using RSS feed fallback (no API key needed)
+      // Fetch latest video via RSS
       try {
         const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${YT_CHANNEL_ID}`;
         const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
@@ -1037,8 +1361,8 @@
         const data = await res.json();
 
         if (data.status === 'ok' && data.items && data.items.length > 0) {
-          feedItemCount = data.items.length;
           const item = data.items[0];
+          // Extract video ID from link
           const videoIdMatch = item.link.match(/v=([^&]+)/);
           const videoId = videoIdMatch ? videoIdMatch[1] : null;
           const thumbUrl = videoId
@@ -1046,10 +1370,9 @@
             : (item.thumbnail || '');
           const pubDate = item.pubDate ? ytTimeAgo(item.pubDate) : '';
           const title = item.title || 'Latest Video';
-          const link = item.link || `https://www.youtube.com/${YT_HANDLE}`;
+          const link = item.link || `https://www.youtube.com/@CyberLabDiaries`;
 
           wrap.innerHTML = `
-            <div class="yt-video-label">Latest Upload</div>
             <div class="yt-thumbnail-wrap" onclick="window.open('${link}','_blank')">
               <img class="yt-thumb-img" src="${thumbUrl}" alt="${escStr(title)}"
                 onerror="this.src='https://img.youtube.com/vi/${videoId}/hqdefault.jpg'">
@@ -1063,24 +1386,39 @@
               </div>
             </div>
           `;
+
+          // Try channel stats via a secondary RSS call
+          if (data.feed) {
+            document.getElementById('ytVideos').textContent = data.items.length + '+';
+          }
         } else {
           throw new Error('No items');
         }
       } catch(err) {
+        // Fallback: show a direct link card
         wrap.innerHTML = `
-          <div class="yt-video-label">Channel Preview</div>
-          <div class="yt-thumbnail-wrap" onclick="window.open('https://www.youtube.com/${YT_HANDLE}','_blank')"
-               style="display:flex;align-items:center;justify-content:center;min-height:160px;background:rgba(255,0,0,0.05);border-color:rgba(255,0,0,0.3);">
-            <div style="text-align:center;">
-              <div style="font-size:2.5rem;margin-bottom:.75rem;">▶</div>
-              <div style="font-family:var(--mono);font-size:.75rem;color:#ff4444;letter-spacing:2px;">VISIT CHANNEL</div>
-              <div style="font-family:var(--mono);font-size:.65rem;color:#4a6080;margin-top:.3rem;letter-spacing:1px;">${YT_HANDLE}</div>
-            </div>
-          </div>
+<div class="yt-thumbnail-wrap"
+     style="position:relative;display:flex;align-items:center;justify-content:center;min-height:160px;background:rgba(255,0,0,0.05);border-color:rgba(255,0,0,0.3);overflow:hidden;">
+
+  <iframe 
+    width="100%" 
+    height="100%" 
+    src="https://www.youtube.com/embed/rY-SLmBcito?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&loop=1&playlist=rY-SLmBcito"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen>
+  </iframe>
+
+</div>
+
         `;
       }
 
-      await loadChannelStats(feedItemCount);
+      // Channel stats — note: YouTube's public API requires a key for subscriber counts.
+      // We'll display what we can and show a graceful placeholder for subscriber count.
+      document.getElementById('ytSubs').textContent = '—';
+      document.getElementById('ytViews').textContent = '—';
     }
 
     function escStr(s) { return String(s).replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
@@ -1275,12 +1613,236 @@
       btn.classList.add('loading'); btn.textContent = '⟳ Loading...';
       rmCurrentPath = [];
       await Promise.all([rmLoadRepo(), rmLoadFiles(), rmLoadCommits(), rmLoadActivity(), rmLoadReadme()]);
-      document.getElementById('rmFooter').textContent = `Last updated: ${new Date().toLocaleTimeString()} — Auto-refreshes every 5 min`;
+nt = `⟳ Last synced: ${new Date().toLocaleTimeString()}`;
       btn.classList.remove('loading'); btn.textContent = '⟳ Refresh';
     }
 
     rmLoadAll();
-    setInterval(rmLoadAll, 5 * 60 * 1000);
+
+    /* ===== HACKERS LAB MONITOR ===== */
+    const HL_OWNER = 'kushanbhagya';
+    const HL_REPO = 'Hackers-Lab';
+    const HL_BASE = `https://api.github.com/repos/${HL_OWNER}/${HL_REPO}`;
+    let hlCurrentPath = [];
+
+    function hlSwitchTab(name) {
+      const names = ['files','commits','activity','readme'];
+      document.querySelectorAll('.hl-tab').forEach((t,i) => t.classList.toggle('active', names[i] === name));
+      document.querySelectorAll('.hl-tab-content').forEach(c => c.classList.remove('active'));
+      document.getElementById(`hlTab-${name}`).classList.add('active');
+    }
+
+    async function hlApiFetch(url) {
+      const res = await fetch(url, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    }
+
+    function hlTimeAgo(dateStr) {
+      const diff = Date.now() - new Date(dateStr).getTime();
+      const mins = Math.floor(diff/60000);
+      if (mins < 1) return 'just now';
+      if (mins < 60) return `${mins}m ago`;
+      const hrs = Math.floor(mins/60);
+      if (hrs < 24) return `${hrs}h ago`;
+      const days = Math.floor(hrs/24);
+      if (days < 30) return `${days}d ago`;
+      return new Date(dateStr).toLocaleDateString();
+    }
+
+    function hlFmtSize(bytes) {
+      if (!bytes) return '';
+      if (bytes < 1024) return `${bytes}B`;
+      if (bytes < 1048576) return `${(bytes/1024).toFixed(1)}KB`;
+      return `${(bytes/1048576).toFixed(1)}MB`;
+    }
+
+    function hlGetFileIcon(name) {
+      const ext = name.split('.').pop().toLowerCase();
+      const map = { md:'📄',txt:'📄',pdf:'📕',py:'🐍',js:'🟨',sh:'⚙️',bash:'⚙️',yaml:'⚙️',yml:'⚙️',json:'📦',png:'🖼',jpg:'🖼',zip:'📦',dockerfile:'🐳' };
+      return map[ext]||(name.toLowerCase()==='dockerfile'?'🐳':'📄');
+    }
+
+    async function hlLoadRepo() {
+      try {
+        const data = await hlApiFetch(HL_BASE);
+        document.getElementById('hlStars').textContent = data.stargazers_count ?? 0;
+        document.getElementById('hlForks').textContent = data.forks_count ?? 0;
+        document.getElementById('hlWatchers').textContent = data.watchers_count ?? 0;
+        document.getElementById('hlIssues').textContent = data.open_issues_count ?? 0;
+        const desc = document.getElementById('hlRepoDesc');
+        const topics = (data.topics||[]).map(t=>`<span class="hl-topic">${t}</span>`).join('');
+        desc.innerHTML = `
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;">
+            <span style="font-size:9px;color:#4a2060;text-transform:uppercase;letter-spacing:.1em;">Description</span>
+            <span style="font-size:9px;color:#ff00a0;margin-left:auto;">⬤ ${data.default_branch||'main'}</span>
+          </div>
+          <div style="color:#f0d0ff;font-size:12px;line-height:1.5;">${data.description||'<span style="color:#4a2060">No description.</span>'}</div>
+          <div style="margin-top:6px;display:flex;gap:14px;flex-wrap:wrap;">
+            <span style="font-size:10px;color:#6a4080;">🌐 ${data.language||'N/A'}</span>
+            <span style="font-size:10px;color:#6a4080;">📅 Updated ${hlTimeAgo(data.updated_at)}</span>
+            <span style="font-size:10px;color:#6a4080;">🔒 ${data.private?'Private':'Public'}</span>
+            ${data.license?`<span style="font-size:10px;color:#6a4080;">⚖️ ${data.license.spdx_id}</span>`:''}
+          </div>
+          ${topics?`<div style="margin-top:8px;">${topics}</div>`:''}
+        `;
+      } catch(e) {
+        document.getElementById('hlRepoDesc').innerHTML = `<div class="hl-error">⚠ Could not load repo info.</div>`;
+      }
+    }
+
+    async function hlLoadFiles(path='') {
+      const el = document.getElementById('hlFileList');
+      const badge = document.getElementById('hlFileBadge');
+      el.innerHTML = `<div class="hl-loader"><div class="hl-loader-bar"></div><span>Loading...</span></div>`;
+      try {
+        const url = path ? `${HL_BASE}/contents/${path}` : `${HL_BASE}/contents`;
+        const data = await hlApiFetch(url);
+        const items = Array.isArray(data) ? data : [data];
+        items.sort((a,b) => { if (a.type===b.type) return a.name.localeCompare(b.name); return a.type==='dir'?-1:1; });
+        badge.textContent = `${items.length} items`;
+        const bc = document.getElementById('hlBreadcrumb');
+        if (hlCurrentPath.length > 0) {
+          bc.style.display = 'flex';
+          let bcHTML = `<a onclick="hlNavToRoot()">root</a>`;
+          hlCurrentPath.forEach((seg,i) => {
+            bcHTML += ` <span>/</span> `;
+            bcHTML += i < hlCurrentPath.length-1 ? `<a onclick="hlNavToPath(${i+1})">${seg}</a>` : `<span style="color:#a080c0">${seg}</span>`;
+          });
+          bc.innerHTML = bcHTML;
+        } else { bc.style.display = 'none'; }
+        el.innerHTML = items.map(item => {
+          const icon = item.type==='dir' ? '📁' : hlGetFileIcon(item.name);
+          const cls = item.type==='dir' ? 'hl-file-name dir' : 'hl-file-name';
+          const size = item.type==='file' ? hlFmtSize(item.size) : '';
+          const click = item.type==='dir'
+            ? `onclick="hlNavInto('${item.path}','${item.name}')"`
+            : `onclick="window.open('${item.html_url}','_blank')"`;
+          return `<div class="hl-file-item" ${click}>
+            <span class="hl-file-icon">${icon}</span>
+            <span class="${cls}">${hlEsc(item.name)}</span>
+            <span class="hl-file-size">${size}</span>
+            ${item.type==='dir'?'<span style="color:#4a2060;font-size:11px">›</span>':''}
+          </div>`;
+        }).join('');
+      } catch(e) {
+        el.innerHTML = `<div class="hl-error">⚠ ${e.message}</div>`;
+      }
+    }
+
+    function hlNavInto(path, name) { hlCurrentPath.push(name); hlLoadFiles(path); }
+    function hlNavToRoot() { hlCurrentPath = []; hlLoadFiles(''); }
+    function hlNavToPath(depth) { hlCurrentPath = hlCurrentPath.slice(0,depth); hlLoadFiles(hlCurrentPath.join('/')); }
+
+    async function hlLoadCommits() {
+      const el = document.getElementById('hlCommitList');
+      const badge = document.getElementById('hlCommitBadge');
+      try {
+        const data = await hlApiFetch(`${HL_BASE}/commits?per_page=20`);
+        badge.textContent = `${data.length}+ commits`;
+        el.innerHTML = data.map(c => {
+          const msg = c.commit.message.split('\n')[0];
+          const author = c.commit.author.name;
+          const date = hlTimeAgo(c.commit.author.date);
+          const sha = c.sha.substring(0,7);
+          return `<div class="hl-commit-item" onclick="window.open('${c.html_url}','_blank')">
+            <div class="hl-commit-msg">${hlEsc(msg)}</div>
+            <div class="hl-commit-meta">
+              <span class="hl-commit-sha">${sha}</span>
+              <span class="hl-commit-author">👤 ${hlEsc(author)}</span>
+              <span class="hl-commit-date">${date}</span>
+            </div>
+          </div>`;
+        }).join('');
+      } catch(e) { el.innerHTML = `<div class="hl-error">⚠ ${e.message}</div>`; }
+    }
+
+    async function hlLoadActivity() {
+      const el = document.getElementById('hlActivityList');
+      try {
+        const data = await hlApiFetch(`https://api.github.com/repos/${HL_OWNER}/${HL_REPO}/events?per_page=20`);
+        if (!data.length) { el.innerHTML = `<div class="hl-loader"><span>No recent public events.</span></div>`; return; }
+        el.innerHTML = data.map(ev => {
+          const {icon,text} = hlFmtEvent(ev);
+          return `<div class="hl-event-item">
+            <div class="hl-event-icon">${icon}</div>
+            <div>
+              <div class="hl-event-text">${text}</div>
+              <div class="hl-event-time">${hlTimeAgo(ev.created_at)}</div>
+            </div>
+          </div>`;
+        }).join('');
+      } catch(e) { el.innerHTML = `<div class="hl-error">⚠ ${e.message}</div>`; }
+    }
+
+    function hlFmtEvent(ev) {
+      const actor = `<strong>${ev.actor?.login||'someone'}</strong>`;
+      switch(ev.type) {
+        case 'PushEvent': { const n=ev.payload?.commits?.length||0; const b=ev.payload?.ref?.replace('refs/heads/',''); return {icon:'📝',text:`${actor} pushed ${n} commit${n!==1?'s':''} to <strong>${b}</strong>`}; }
+        case 'CreateEvent': return {icon:'✨',text:`${actor} created ${ev.payload?.ref_type} <strong>${ev.payload?.ref||HL_REPO}</strong>`};
+        case 'WatchEvent': return {icon:'⭐',text:`${actor} starred the repository`};
+        case 'ForkEvent': return {icon:'🍴',text:`${actor} forked the repository`};
+        case 'IssuesEvent': return {icon:'🐛',text:`${actor} ${ev.payload?.action} issue: <strong>${ev.payload?.issue?.title||''}</strong>`};
+        case 'PullRequestEvent': return {icon:'🔀',text:`${actor} ${ev.payload?.action} PR: <strong>${ev.payload?.pull_request?.title||''}</strong>`};
+        case 'ReleaseEvent': return {icon:'🚀',text:`${actor} released <strong>${ev.payload?.release?.tag_name||''}</strong>`};
+        default: return {icon:'📌',text:`${actor} triggered <strong>${ev.type}</strong>`};
+      }
+    }
+
+    async function hlLoadReadme() {
+      const el = document.getElementById('hlReadmeContent');
+      try {
+        const data = await hlApiFetch(`${HL_BASE}/readme`);
+        const text = atob(data.content.replace(/\n/g,''));
+        el.innerHTML = `<div class="hl-readme">${hlEsc(text)}</div>`;
+      } catch(e) { el.innerHTML = `<div class="hl-error">⚠ No README found.</div>`; }
+    }
+
+    function hlEsc(str) {
+      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    async function hlLoadAll() {
+      const btn = document.getElementById('hlRefreshBtn');
+      btn.classList.add('loading'); btn.textContent = '⟳ Loading...';
+      hlCurrentPath = [];
+      await Promise.all([hlLoadRepo(), hlLoadFiles(), hlLoadCommits(), hlLoadActivity(), hlLoadReadme()]);
+      document.getElementById('hlFooter').textContent = `⟳ Last synced: ${new Date().toLocaleTimeString()}`;
+      btn.classList.remove('loading'); btn.textContent = '⟳ Refresh';
+    }
+
+    hlLoadAll();
+
+    /* ===== MATRIX RAIN ===== */
+    (function() {
+      const canvas = document.getElementById('hlMatrixCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+      resize();
+      window.addEventListener('resize', resize);
+      const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノABCDEF<>{}[]//\\\\';
+      const fontSize = 11;
+      let cols = Math.floor(canvas.width / fontSize);
+      let drops = Array(cols).fill(1);
+      function draw() {
+        ctx.fillStyle = 'rgba(2,4,8,0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgba(255,0,160,0.5)';
+        ctx.font = fontSize + 'px "Share Tech Mono", monospace';
+        cols = Math.floor(canvas.width / fontSize);
+        if (drops.length < cols) drops = [...drops, ...Array(cols - drops.length).fill(1)];
+        for (let i = 0; i < cols; i++) {
+          const char = chars[Math.floor(Math.random() * chars.length)];
+          ctx.fillStyle = Math.random() > 0.92 ? 'rgba(255,255,255,0.8)' : 'rgba(255,0,160,0.35)';
+          ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+          drops[i]++;
+        }
+      }
+      setInterval(draw, 60);
+    })();
+
   </script>
 </body>
 </html>
